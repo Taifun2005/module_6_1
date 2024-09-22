@@ -1,37 +1,51 @@
-class  Animal():                    #Животное
-    alive = True                    #(живой)
-    fed = False                     #(накормленный)
+class Animal:  # Животное
     def __init__(self, name):
-        self.name = name            #индивидуальное название каждого животного.
+        self.alive = True  # (живой)
+        self.fed = False  # (накормленный)
+        self.name = name  # индивидуальное название каждого животного.
 
-    def eat(self):
-        food = Plant()
+
+class Plant:  # Растение
+    def __init__(self, name):
+        self.edible = False  # (съедобность)
+        self.name = name  # индивидуальное название каждого растения
+
+
+class Mammal(Animal):  # Млекопитающее
+    def __init__(self, name):
+        super().__init__(name)
+
+    def eat(self, food):
         if food.edible == True:
             print(f'{self.name} съел {food.name}')
-            fed = True
+            self.fed = True
         if food.edible == False:
             print(f"{self.name}не стал есть {food.name}")
-            alive = False
+            self.alive = False
 
 
-
-class Plant():                      #Растение
-    edible = False                  #(съедобность)
+class Predator(Animal):  # Хищник
     def __init__(self, name):
-        self.name = name            #индивидуальное название каждого растения
+        super().__init__(name)
 
-class Mammal(Animal):               #Млекопитающее
-    pass
+    def eat(self, food):
+        if food.edible == True:
+            print(f'{self.name} съел {food.name}')
+            self.fed = True
+        if food.edible == False:
+            print(f"{self.name}не стал есть {food.name}")
+            self.alive = False
 
-class Predator(Animal):             #Хищник
-    pass
 
-class Flower(Plant):                #Цветок
-    pass
+class Flower(Plant):  # Цветок
+    def __init__(self, name):
+        super().__init__(name)
 
-class Fruit(Plant):                 #Фрукт
-    edible = True
-    pass
+
+class Fruit(Plant):  # Фрукт
+    def __init__(self, name):
+        super().__init__(name)
+        edible = True
 
 
 a1 = Predator('Волк с Уолл-Стрит')
